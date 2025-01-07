@@ -8,7 +8,14 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.ba
 
 
 def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 10) -> None:
-    """Train a model on MNIST."""
+    """
+    Train a model on MNIST.
+
+    Args:
+        lr (float): Learning rate.
+        batch_size (int): Batch size.
+        epochs (int): Number of epochs.
+    """
     print("Training day and night")
     print(f"{lr=}, {batch_size=}, {epochs=}")
 

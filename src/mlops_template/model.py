@@ -3,9 +3,10 @@ from torch import nn
 
 
 class MyAwesomeModel(nn.Module):
-    """My awesome model."""
+    """This model is a simple convolutional neural network for image classification."""
 
     def __init__(self) -> None:
+        """Initialize the model."""
         super().__init__()
         self.conv1 = nn.Conv2d(1, 32, 3, 1)
         self.conv2 = nn.Conv2d(32, 64, 3, 1)
