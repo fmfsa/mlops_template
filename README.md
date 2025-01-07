@@ -53,3 +53,17 @@ The directory structure of the project looks like this:
 Created using [mlops_template](https://github.com/SkafteNicki/mlops_template),
 a [cookiecutter template](https://github.com/cookiecutter/cookiecutter) for getting
 started with Machine Learning Operations (MLOps).
+
+## Notes
+To save new dependencies, use the following command:
+Either use pipreqs or:
+```bash
+pip list
+pip freeze > requirements.txt
+```
+
+For format and linting, use the following commands:
+```bash
+ruff check .
+ruff format .
+``
