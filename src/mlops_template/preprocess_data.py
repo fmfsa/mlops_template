@@ -1,6 +1,8 @@
 import torch
 import typer
 
+app = typer.Typer()
+
 
 def normalize(images: torch.Tensor) -> torch.Tensor:
     """
@@ -15,7 +17,8 @@ def normalize(images: torch.Tensor) -> torch.Tensor:
     return (images - images.mean()) / images.std()
 
 
-def preprocess_data(raw_dir: str, processed_dir: str) -> None:
+@app.command()
+def preprocess_data(raw_dir: str = "data.raw", processed_dir: str = "data.processed") -> None:
     """
     Process raw data and save it to processed directory.
 
@@ -65,4 +68,4 @@ def corrupt_mnist() -> tuple[torch.utils.data.Dataset, torch.utils.data.Dataset]
 
 
 if __name__ == "__main__":
-    typer.run(preprocess_data)
+    app()

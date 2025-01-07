@@ -56,7 +56,7 @@ started with Machine Learning Operations (MLOps).
 
 ## Notes
 To save new dependencies, use the following command:
-Either use pipreqs or:
+Either use pipreqs or pip freeze (not recommended):
 ```bash
 pip list
 pip freeze > requirements.txt
@@ -66,4 +66,5 @@ For format and linting, use the following commands:
 ```bash
 ruff check .
 ruff format .
-``
+```
+

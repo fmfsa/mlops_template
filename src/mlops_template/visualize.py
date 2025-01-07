@@ -5,7 +5,10 @@ from mlops_template.model import MyAwesomeModel
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 
+app = typer.Typer()
 
+
+@app.command()
 def visualize(model_checkpoint: str, figure_name: str = "embeddings.png") -> None:
     """
     Visualize model predictions.
@@ -48,4 +51,4 @@ def visualize(model_checkpoint: str, figure_name: str = "embeddings.png") -> Non
 
 
 if __name__ == "__main__":
-    typer.run(visualize)
+    app()
