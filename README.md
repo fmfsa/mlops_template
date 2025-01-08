@@ -29,15 +29,15 @@ The directory structure of the project looks like this:
 │   ├── project_name/
 │   │   ├── __init__.py
 │   │   ├── api.py
-│   │   ├── data.py
+│   │   ├── preprocess_data.py
 │   │   ├── evaluate.py
-│   │   ├── models.py
+│   │   ├── model.py
 │   │   ├── train.py
 │   │   └── visualize.py
 └── tests/                    # Tests
 │   ├── __init__.py
 │   ├── test_api.py
-│   ├── test_data.py
+│   ├── test_preprocess_data.py
 │   └── test_model.py
 ├── .gitignore
 ├── .pre-commit-config.yaml

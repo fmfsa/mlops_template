@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import torch
 import typer
-from preprocess_data import corrupt_mnist
-from model import MyAwesomeModel
+from mlops_template.preprocess_data import corrupt_mnist
+from mlops_template.model import MyAwesomeModel
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 app = typer.Typer()
