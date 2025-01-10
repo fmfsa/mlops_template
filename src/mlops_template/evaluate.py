@@ -2,8 +2,13 @@ import torch
 import typer
 from mlops_template.preprocess_data import corrupt_mnist
 from mlops_template.model import MyAwesomeModel
+from loguru import logger
 
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
+logger.add("logs/evaluate.log", level="DEBUG", rotation="100 MB")
+
+DEVICE = torch.device(
+    "cpu"
+)  # torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 app = typer.Typer()
 
 
@@ -15,11 +20,14 @@ def evaluate(model_checkpoint: str) -> None:
     Args:
         model_checkpoint (str): Path to the model checkpoint.
     """
-    print("Evaluating like my life depended on it")
-    print(model_checkpoint)
+    logger.info("Evaluating like my life depended on it")
+    logger.info(model_checkpoint)
 
     model = MyAwesomeModel().to(DEVICE)
-    model.load_state_dict(torch.load(model_checkpoint))
+
+    model.load_state_dict(
+        torch.load(model_checkpoint, map_location="cpu")
+    )  # model.load_state_dict(torch.load(model_checkpoint))
 
     _, test_set = corrupt_mnist()
     test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=32)
@@ -31,7 +39,7 @@ def evaluate(model_checkpoint: str) -> None:
         y_pred = model(img)
         correct += (y_pred.argmax(dim=1) == target).float().sum().item()
         total += target.size(0)
-    print(f"Test accuracy: {correct / total}")
+    logger.info(f"Test accuracy: {correct / total}")
 
 
 if __name__ == "__main__":

@@ -13,9 +13,8 @@ COPY pyproject.toml pyproject.toml
 COPY data/ data/
 COPY models/ models/
 COPY reports/ reports/
-COPY configs/ configs/
 
 RUN --mount=type=cache,target=~/pip/.cache pip install -r requirements.txt --no-cache-dir --verbose
 RUN pip install . --no-deps --no-cache-dir --verbose
 
-ENTRYPOINT ["python", "-u", "src/mlops_template/train.py"]
+ENTRYPOINT ["python", "-u", "src/mlops_template/evaluate.py"]

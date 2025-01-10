@@ -1,5 +1,10 @@
 import torch
+from omegaconf import OmegaConf
 from torch import nn
+import hydra
+from loguru import logger
+
+logger.add("logs/model.log", level="DEBUG", rotation="100 MB")
 
 
 class MyAwesomeModel(nn.Module):
@@ -27,11 +32,21 @@ class MyAwesomeModel(nn.Module):
         return self.fc1(x)
 
 
-if __name__ == "__main__":
+@hydra.main(version_base="1.3", config_path="../../configs", config_name="config.yaml")
+def main(config) -> None:
+    hparams = config.model
+
+    logger.info(f"configuration: \n {OmegaConf.to_yaml(config)}")
+    torch.manual_seed(hparams["seed"])
+
     model = MyAwesomeModel()
-    print(f"Model architecture: {model}")
-    print(f"Number of parameters: {sum(p.numel() for p in model.parameters())}")
+    logger.info(f"Model architecture: {model}")
+    logger.info(f"Number of parameters: {sum(p.numel() for p in model.parameters())}")
 
     dummy_input = torch.randn(1, 1, 28, 28)
     output = model(dummy_input)
-    print(f"Output shape: {output.shape}")
+    logger.info(f"Output shape: {output.shape}")
+
+
+if __name__ == "__main__":
+    main()

@@ -59,6 +59,12 @@ def preprocess_data(ctx: Context) -> None:
 
 
 @task
+def evaluate(ctx: Context) -> None:
+    """Evaluate results."""
+    ctx.run(f"python src/{PROJECT_NAME}/evaluate.py models/model.pth", echo=True, pty=not WINDOWS)
+
+
+@task
 def visualize(ctx: Context) -> None:
     """Visualize model."""
     ctx.run(f"python src/{PROJECT_NAME}/visualize.py models/model.pth", echo=True, pty=not WINDOWS)

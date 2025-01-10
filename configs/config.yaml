@@ -1,0 +1,3 @@
+defaults:
+    - model: model_default_config
+    - train: train_default_config

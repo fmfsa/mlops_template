@@ -58,13 +58,29 @@ started with Machine Learning Operations (MLOps).
 To save new dependencies, use the following command:
 Either use pipreqs or pip freeze (not recommended):
 ```bash
-pip list
-pip freeze > requirements.txt
+pipreqs .
 ```
 
 For format and linting, use the following commands:
 ```bash
 ruff check .
 ruff format .
+```
+
+To run locally in dev, use the following command:
+```bash
+pip install -e .
+train
+evaluate
+visualize
+```
+
+To create and run docker images
+```bash
+docker build -f dockerfiles/train.dockerfile . -t train:latest
+docker run --name train --rm -v $(pwd)/models/model.pth:/models/model.pth -v $(pwd)/data/test_images.pt:/data/test_images.pt -v $(pwd)/data/test_targets.pt:/data/test_targets.pt train:latest
+
+docker build -f dockerfiles/evaluate.dockerfile . -t evaluate:latest
+docker run --name evaluate --rm -v $(pwd)/models/model.pth:/models/model.pth -v $(pwd)/data/test_images.pt:/data/test_images.pt -v $(pwd)/data/test_targets.pt:/data/test_targets.pt evaluate:latest ../models/model.pth
 ```
 
