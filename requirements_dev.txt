@@ -35,4 +35,4 @@ scikit_learn==1.6.0
 torch~=2.5.1
 torchvision==0.20.1
 matplotlib~=3.10.0
-scikit-learn~=1.6.0
+scikit-learn~=1.6.1
